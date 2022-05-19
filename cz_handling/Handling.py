@@ -48,12 +48,36 @@ PotopiLabel.grid(row=4, column=2)
 potop_auta = Entry(root)
 potop_auta.grid(row=5,column=2)
 
+SpaceLabel2 = Label(root, text="", bg='#474747')
+SpaceLabel2.grid(row=6)
+
+def isChecked():
+    if predokolka.get() == 1:
+	nahon = ""1.000000\""
+    elif zadokolka.get() == 1:
+	nahon = ""0.000000\""
+	elif ctyrkolka.get() == 1:
+	nahon = ""0.500000\""
+	elif predokola.get() == 1 and zadokolka.get() == 1 and ctyrkolka.get() == 1:
+	print("Vyberte prosím jen jednu možnost!")
+
+predokolka = intVar()
+zadokolka = intVar()
+ctyrkolka = intVar()
+
+nahonLabel = Label(root, text="5. Jaký náhon má vozidlo ? (Přední, zadní, 4kolka)")
+nahonLabel.grid(row=7,column=1)
+Checkbutton(root, text="Předokolka", onvalue=1, offvalue=0, command=isChecked).pack()
+Checkbutton(root, text="Zadokolka", onvalue=1, offvalue=0, command=isChecked).pack()
+Checkbutton(root, text="Čtyřkolka", onvalue=1, offvalue=0, command=isChecked).pack()
+
 
 def Click():
     file1.writelines("<handlingName>" + name_auta.get() + "</handlingName>\n")
     file1.writelines("<fMass value=\"" + vaha_auta.get() + ".000000\"" + " />\n")
-    file1.writelines("<fInitialDragCoeff value=\"" + odpor_auta.get() + ".000000\"" + " />\n")
-    file1.writelines("<fPercentSubmerged value=\"" + potop_auta.get() + ".000000\"" + " />\n")
+    file1.writelines("<fInitialDragCoeff value="" + odpor_auta.get() + ".000000"" + " />\n")
+    file1.writelines("<fPercentSubmerged value="" + potop_auta.get() + ".000000"" + " />\n")
+	file1.writelines("<fDriveBiasFront value=" + nahon.get() + " />\n"
     file1.close() #uzavře soubor
 
 Yobutton = Button(root, text="Uložit Handling", command=Click)
